@@ -19,16 +19,23 @@ color constant (i) "([ 	]|^):[0-9A-Z_]+\b"
 color constant "\b(__CALLER__|__ENV__|__DIR__|__MODULE__|__aliases__|__block__|alias|case|super|unquote|unquote_splicing|with)\b"
 
 ## Regex
-color constant "~r/([^/]|(\\/))*/[iomx]*" "~r\{([^}]|(\\}))*\}[iomx]*"
+color constant "~r/([^/]|(\\/))*/" "~r\{([^}]|(\\}))*\}"
+
+## Strings, char lists and words sigils
+color constant "~(s|w|c)\(.*?\)" "~(s|w|c)\{.*?\}"
+
+## Word list sigils with modifiers
+color constant "~w\(.*?\)(c|s|a)" "~w\{.*?\}(c|s|a)"
 
 ## Double-quoted strings
-color constant.string ""([^"]|(\\"))*"" "%[QW]?\{[^}]*\}" "%[QW]?\([^)]*\)" "%[QW]?<[^>]*>" "%[QW]?\[[^]]*\]" "%[QW]?\$[^$]*\$" "%[QW]?\^[^^]*\^" "%[QW]?![^!]*!"
+color constant.string "\".*?\""
 
 ## Expression substitution
 color special "#\{[^}]*\}"
 
-## Single-quoted strings... Perhaps these should stand out?
-color constant.string "'([^']|(\\'))*'" "%[qw]\{[^}]*\}" "%[qw]\([^)]*\)" "%[qw]<[^>]*>" "%[qw]\[[^]]*\]" "%[qw]\$[^$]*\$" "%[qw]\^[^^]*\^" "%[qw]![^!]*!"
+## Single-quoted strings...
+## Perhaps these should stand out differently from double-quoted?
+color constant.string "\'.*?\'"
 
 ## Comments
 color comment "#[^{].*$" "#$"
